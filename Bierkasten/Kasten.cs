@@ -13,29 +13,36 @@ public class Kasten
         this.KastenType = name;
     }
 
-    public void TakeBottle()
+    public bool TakeBottle(int NumberOfBottles)
     {
-
+        
+        if (NumberEmptyBottles + NumberOfBottles > NumberBottles) {
+            Console.WriteLine("So viele Flaschen gibts leider nicht mehr, es gibt nur noch "+ (NumberBottles-NumberEmptyBottles));
+            return false;   
+        }
+        NumberEmptyBottles = NumberEmptyBottles + NumberOfBottles;
+        return true;
     }
 
     public void CreateSmallKasten(int Size)
     {
+        int NumberPlacedBottels = 0;
         Console.Write("-");
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j = 1; j < 5; j++)
             {
-                if (i == 0 || i == 4)
+                if (i == 1 || i == 5)
                 {
                     Console.Write("----");
                 }
                 else
                 {
-                    if (i == 1 && j == 0 && Size == 11)
+                    if (i == 3 && j == 1 && Size == 11)
                     {
                         j++;
                     }
-                    if (i * j >= NumberBottles - NumberEmptyBottles)
+                    if (NumberPlacedBottels >= NumberBottles - NumberEmptyBottles)
                     {
                         Console.Write("| o ");
                     }
@@ -43,13 +50,14 @@ public class Kasten
                     {
                         Console.Write("| * ");
                     }
+                    NumberPlacedBottels++;
                 }
-                if (j == 3 && (i != 0 && i != 4))
+                if (j == 4 && (i != 1 && i != 5))
                 {
                     Console.Write("|");
                 }
             }
-            if (i == 4)
+            if (i == 5)
             {
                 Console.Write("-");
             }
@@ -59,18 +67,19 @@ public class Kasten
     }
     public void CreateKasten(int Size)
     {
+        int NumberPlacedBottels = 0;
         Console.Write("-");
-        for (int i = 0; i < 6; i++)
+        for (int i = 1; i < 7; i++)
         {
-            for (int j = 0; j < Size / 4; j++)
+            for (int j = 1; j < Size / 4 + 1; j++)
             {
-                if (i == 0 || i == 5)
+                if (i == 1 || i == 6)
                 {
                     Console.Write("----");
                 }
                 else
                 {
-                    if (i * j >= NumberBottles - NumberEmptyBottles)
+                    if (NumberPlacedBottels >= NumberBottles - NumberEmptyBottles)
                     {
                         Console.Write("| o ");
                     }
@@ -78,13 +87,14 @@ public class Kasten
                     {
                         Console.Write("| * ");
                     }
-                }
-                if (j == Size/4 -1 && (i != 0 && i != 5))
-                {
-                    Console.Write("|");
+                    if (j == Size / 4)
+                    {
+                        Console.Write("|");
+                    }
+                    NumberPlacedBottels++;
                 }
             }
-            if (i == 5)
+            if (i == 6)
             {
                 Console.Write("-");
             }
