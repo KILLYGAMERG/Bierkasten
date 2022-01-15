@@ -6,8 +6,8 @@ public class Start
     static void Main() {
        
         Console.WriteLine("Hello, World!");
-        Kasten myKasten = new Kasten((int)KastenSize.small , "Cola");
-        myKasten.CreateSmallKasten((int)KastenSize.small);
+        Kasten myKasten = new Kasten((int)KastenSize.large , "Cola");
+        myKasten.CreateKasten((int)KastenSize.large);
 
     }
    
