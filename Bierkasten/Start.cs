@@ -48,6 +48,7 @@ public class Start
         string antwort = Console.ReadLine();
         if (antwort.Equals("Ja"))
         {
+            KastenListe.Clear();
             Main();
         }
     }
