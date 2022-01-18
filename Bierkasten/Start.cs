@@ -5,18 +5,20 @@ namespace Bierkasten;
 public class Start
 {
     public int[] KastenGroeßen = { 11, 12, 20, 24 };
-    public static string[] KastenTypesList { get; set; } = { "Cola", "Bier", "Apfelsaft", "Wasser" };
+    public string[] KastenTypesList { get; set; } = { "Cola", "Bier", "Apfelsaft", "Wasser" };
     public static List<Kasten> KastenListe { get; set; } = new List<Kasten>();
 
     static void Main()
     {
         Kasten myKasten = new Kasten();
         AbfrageKasten AbfrageKasten = new AbfrageKasten();
+
         int AnzahlKasten = AbfrageKasten.AbfrageKastenAnzahl();
         legeKastenElementInListe(myKasten, AnzahlKasten);
         ausgebenKasten(AnzahlKasten);
-        Kasten meinKasten = AbfrageKasten.FrageKastenAb(KastenListe);
-
+        Kasten MeinAusgewaehlterKasten = AbfrageKasten.FrageKastenAb(KastenListe);
+        MeinAusgewaehlterKasten.TakeBottle();
+        ausgebenKasten(AnzahlKasten);
     }
 
     private static void legeKastenElementInListe(Kasten myKasten, int AnzahlKasten)
@@ -43,14 +45,11 @@ public class Start
         }
     }
 
-    public void ListeAlleMöglichkeiten(string Möglichkeit)
+    public static void ListeAlleMöglichkeiten(string Möglichkeit)
     {
         if (Möglichkeit.Equals("KastenTypesList"))
         {
-            for (int i = 1; i <= 4; i++)
-            {
-                Console.WriteLine(i + ". " + KastenTypesList[i - 1]);
-            }
+            ListeKastenTypen();
         }
         else
         {
@@ -58,11 +57,21 @@ public class Start
         }
     }
 
-    public void ListeKastenGroeßen()
+    public static void ListeKastenGroeßen()
     {
-        Console.WriteLine("1. extra kleiner Kasten: " + KastenGroeßen[0]);
-        Console.WriteLine("2. kleiner Kasten: " + KastenGroeßen[1]);
-        Console.WriteLine("3. mittlerer Kasten: " + KastenGroeßen[2]);
-        Console.WriteLine("4. großer Kasten: " + KastenGroeßen[3]);
+        Start myStart  = new Start();
+        for (int i = 0; i < myStart.KastenGroeßen.Length; i++) 
+        {
+            Console.WriteLine( (i+1) + " . " + myStart.KastenGroeßen[i]);
+        }
+    }
+
+    public static void ListeKastenTypen() 
+    {
+        Start myStart = new Start();
+        for (int i = 0; i < myStart.KastenTypesList.Length; i++)
+        {
+            Console.WriteLine((i + 1) + " . " + myStart.KastenTypesList[i]);
+        }
     }
 }

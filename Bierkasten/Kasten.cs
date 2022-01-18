@@ -2,8 +2,6 @@
 
 public class Kasten
 {
-    Start myStart = new Start();
-    AbfrageKasten AbfrageKasten = new AbfrageKasten();
     
     public int NumberBottles { get; set; }
     public string KastenType { get; set; }
@@ -21,33 +19,22 @@ public class Kasten
 
     public Kasten ErstellenKastenObjekt(int Nummerkasten)
     {
-        return new Kasten(myStart.KastenGroeßen[AbfrageKasten.AbfrageKastenGroeße(Nummerkasten) - 1], Start.KastenTypesList[AbfrageKasten.AbfrageKastenArt(Nummerkasten) - 1]); 
+        Start myStart = new Start();
+        AbfrageKasten AbfrageKasten = new AbfrageKasten();
+        return new Kasten( myStart.KastenGroeßen[AbfrageKasten.AbfrageKastenGroeße(Nummerkasten) - 1], myStart.KastenTypesList[AbfrageKasten.AbfrageKastenArt(Nummerkasten) - 1]); 
     }
 
-    public bool TakeBottle(int NumberOfBottles)
+    public void TakeBottle()
     {
-
-            
-            if (NumberEmptyBottles + NumberOfBottles > NumberBottles)
-            {
-                Console.WriteLine("So viele Flaschen gibts leider nicht mehr, es gibt nur noch " + (NumberBottles - NumberEmptyBottles));
-                return false;
-            }
-            NumberEmptyBottles = NumberEmptyBottles + NumberOfBottles;
-        return true;
-    }
-
-    public Kasten findeKasten(List<Kasten> meineKastenListe)
-    {
-        for (int i = 0; i < meineKastenListe.Count; i++) 
+        Console.WriteLine("Wie viele Flaschen möchtest du haben?");
+        int NumberOfBottles = Convert.ToInt32(Console.ReadLine());
+        if (NumberEmptyBottles + NumberOfBottles > NumberBottles)
         {
-            string name = meineKastenListe[i].KastenType;
-            if (AbfrageKasten.vergleicheStringMitNamen(name)) 
-            {
-                return meineKastenListe[i];
-            }
+                Console.WriteLine("So viele Flaschen gibts leider nicht mehr, es gibt nur noch " + (NumberBottles - NumberEmptyBottles));
+                Console.WriteLine("Probiere es erneut!");
+                TakeBottle();
         }
-        return meineKastenListe[0];
+        NumberEmptyBottles = NumberEmptyBottles + NumberOfBottles;
     }
 
     public void CreateSmallKasten(int Size)
