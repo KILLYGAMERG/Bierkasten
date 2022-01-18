@@ -15,10 +15,41 @@ public class Start
 
         int AnzahlKasten = AbfrageKasten.AbfrageKastenAnzahl();
         legeKastenElementInListe(myKasten, AnzahlKasten);
+        while (pruefeKastenfuelle(AnzahlKasten))
+        {
+            ausgebenKasten(AnzahlKasten);
+            Kasten MeinAusgewaehlterKasten = AbfrageKasten.FrageKastenAb(KastenListe);
+            MeinAusgewaehlterKasten.TakeBottle();
+        }
         ausgebenKasten(AnzahlKasten);
-        Kasten MeinAusgewaehlterKasten = AbfrageKasten.FrageKastenAb(KastenListe);
-        MeinAusgewaehlterKasten.TakeBottle();
-        ausgebenKasten(AnzahlKasten);
+        frageNeustartAb();
+    }
+
+    private static bool pruefeKastenfuelle(int AnzahlKasten)
+    {
+        int verfuegbareflaschen = 0;
+        for (int i = 0; i < AnzahlKasten; i++)
+        {
+            verfuegbareflaschen = verfuegbareflaschen + KastenListe[i].NumberBottles;
+            verfuegbareflaschen = verfuegbareflaschen - KastenListe[i].NumberEmptyBottles;
+        }
+        if (verfuegbareflaschen == 0) 
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private static void frageNeustartAb()
+    {
+        Start myStart = new Start();
+        Console.WriteLine("Möchtest du Restarten?");
+        Console.WriteLine("Ja/Nein");
+        string antwort = Console.ReadLine();
+        if (antwort.Equals("Ja"))
+        {
+            Main();
+        }
     }
 
     private static void legeKastenElementInListe(Kasten myKasten, int AnzahlKasten)

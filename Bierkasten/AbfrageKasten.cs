@@ -3,6 +3,7 @@ namespace Bierkasten;
 
 public class AbfrageKasten
 {
+
     public int AbfrageKastenAnzahl()
     {
         Console.WriteLine("Wie viele Kästen möchtest du haben?");
@@ -11,9 +12,9 @@ public class AbfrageKasten
 
     public Kasten FrageKastenAb(List<Kasten> MeineKastenListe) {
         Console.WriteLine("Was für ein getränk möchtest du haben?"); 
-        String? EingegebenerName = Console.ReadLine();
+        string EingegebenerName = Console.ReadLine();
         for (int i = 0; i < MeineKastenListe.Count(); i++) {
-            if (EingegebenerName.Equals(MeineKastenListe[i].KastenType)) 
+            if (EingegebenerName.Equals(MeineKastenListe[i].KastenType) && (MeineKastenListe[i].NumberEmptyBottles < MeineKastenListe[i].NumberBottles)) 
             {
                 return MeineKastenListe[i];
             }

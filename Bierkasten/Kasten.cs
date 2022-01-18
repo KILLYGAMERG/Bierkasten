@@ -11,6 +11,7 @@ public class Kasten
     {
 
     }
+
     public Kasten(int numberBottles, string kastenType)
     {
         NumberBottles = numberBottles;
